@@ -1,0 +1,36 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">
+      {% if page.os %}支持：{{ page.os | join: "/" }} · {% endif %}
+      {% if page.license %}许可：{{ page.license }} · {% endif %}
+      更新：{{ page.updated | default: page.date | date: "%Y-%m-%d" }}
+    </p>
+    {% if page.tags %}
+      <p>{% for t in page.tags %}<span class="badge">{{ t }}</span>{% endfor %}</p>
+    {% endif %}
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+    {% if page.downloads %}
+      <h3>下载</h3>
+      <ul>
+        {% for d in page.downloads %}
+          <li><a class="btn" href="{{ d.url }}" target="_blank" rel="noopener">下载链接</a>
+          {% if d.sha256 %}<small>（SHA256：{{ d.sha256 }}）</small>{% endif %}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% if page.homepage %}
+      <p><a href="{{ page.homepage }}" target="_blank" rel="noopener">项目主页</a></p>
+    {% endif %}
+  </div>
+
+  {% include giscus.html %}
+</article>
+
+{% include theme-toggle.html %}
