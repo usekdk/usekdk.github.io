@@ -4,19 +4,25 @@ title: 软件列表
 permalink: /software.html
 ---
 
-下面是全部软件条目（按更新时间倒序）：
+{% include theme-toggle.html %}
 
-<ul>
+<div class="card-grid">
 {% assign items = site.software | sort: "updated" | reverse %}
 {% for s in items %}
-  <li>
-    <a href="{{ s.url | relative_url }}">{{ s.title }}</a>
-    <small>
-      {% if s.os %} [{{ s.os | join: "/" }}] {% endif %}
-      {% if s.license %} · 许可：{{ s.license }} {% endif %}
-      · 更新：{{ s.updated | default: s.date | date: "%Y-%m-%d" }}
-    </small>
-    {% if s.tags %}<br><small>标签：{{ s.tags | join: ", " }}</small>{% endif %}
-  </li>
+  <div class="card">
+    <h3><a href="{{ s.url | relative_url }}">{{ s.title }}</a></h3>
+    <div class="meta">
+      {% if s.os %}支持：{{ s.os | join: "/" }} · {% endif %}
+      更新：{{ s.updated | default: s.date | date: "%Y-%m-%d" }}
+    </div>
+    {% if s.tags %}
+      <div style="margin:.5rem 0;">
+        {% for t in s.tags %}<span class="badge">{{ t }}</span>{% endfor %}
+      </div>
+    {% endif %}
+    {% if s.homepage %}
+      <a class="btn" href="{{ s.homepage }}" target="_blank" rel="noopener">官网/仓库</a>
+    {% endif %}
+  </div>
 {% endfor %}
-</ul>
+</div>
