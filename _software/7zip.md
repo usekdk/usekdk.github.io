@@ -1,4 +1,5 @@
 ---
+layout: software
 title: 7-Zip
 os: ["Windows"]
 license: "GPLv2"
