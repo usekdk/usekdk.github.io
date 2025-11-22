@@ -1,0 +1,17 @@
+---
+layout: null
+permalink: /search.json
+---
+[
+{% assign items = site.software %}
+{% for s in items %}
+  {
+    "url": "{{ s.url | relative_url }}",
+    "title": {{ s.title | jsonify }},
+    "tags": {{ s.tags | jsonify }},
+    "os": {{ s.os | jsonify }},
+    "license": {{ s.license | jsonify }},
+    "text": {{ s.content | strip_html | strip_newlines | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]
