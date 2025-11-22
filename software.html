@@ -1,0 +1,22 @@
+---
+layout: page
+title: 软件列表
+permalink: /software.html
+---
+
+下面是全部软件条目（按更新时间倒序）：
+
+<ul>
+{% assign items = site.software | sort: "updated" | reverse %}
+{% for s in items %}
+  <li>
+    <a href="{{ s.url | relative_url }}">{{ s.title }}</a>
+    <small>
+      {% if s.os %} [{{ s.os | join: "/" }}] {% endif %}
+      {% if s.license %} · 许可：{{ s.license }} {% endif %}
+      · 更新：{{ s.updated | default: s.date | date: "%Y-%m-%d" }}
+    </small>
+    {% if s.tags %}<br><small>标签：{{ s.tags | join: ", " }}</small>{% endif %}
+  </li>
+{% endfor %}
+</ul>
